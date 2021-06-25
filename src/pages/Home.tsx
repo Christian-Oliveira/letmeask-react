@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import {useHistory} from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
@@ -25,14 +26,14 @@ export function Home() {
         event.preventDefault();
 
         if (roomCode.trim() === '') {
-            alert('Código da sala não informado, digite um código!');
+            toast.error("Digite um código!");
             return;
         }
 
         const roomRef = await database.ref(`rooms/${roomCode}`).get();
         
         if (!roomRef.exists()) {
-            alert('Sala não existe!');
+            toast.error("Sala não existe!");
             return;
         }
 
@@ -56,11 +57,12 @@ export function Home() {
                     </button>
                     <div className="separator">ou entre em uma sala</div>
                     <form onSubmit={handleJoinRoom}>
-                        <input 
+                        <input
                             type="text"
                             placeholder="Digite o código da sala"
                             onChange={event => setRoomCode(event.target.value)}
                             value={roomCode}
+                            autoFocus
                         />
                         <Button type="submit">
                             Entrar na sala

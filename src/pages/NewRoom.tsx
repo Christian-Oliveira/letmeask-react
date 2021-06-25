@@ -1,5 +1,6 @@
 import {FormEvent, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 import '../styles/auth.scss';
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -19,6 +20,7 @@ export function NewRoom() {
         event.preventDefault();
         
         if (newRoom.trim() === '') {
+            toast.error("Digite um nome para a sala!");
             return;
         }
 
