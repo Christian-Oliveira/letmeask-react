@@ -1,4 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+
 import { auth, firebase } from "../services/firebase";
 
 type UserType = {
@@ -27,13 +29,13 @@ export function AuthContextProvider(props: AuthContextProps) {
             const {displayName, photoURL, uid} = user;
 
             if (!displayName || !photoURL) {
-                throw new Error("Missing information from Google Account.");
+                toast.error("Informação imcompleta da conta Google.")
             }
 
             setUser({
                 id: uid,
-                name: displayName,
-                avatar: photoURL,
+                name: displayName as string,
+                avatar: photoURL as string,
             });
             }
         })
@@ -53,9 +55,9 @@ export function AuthContextProvider(props: AuthContextProps) {
             }
 
             setUser({
-            id: uid,
-            name: displayName,
-            avatar: photoURL,
+                id: uid,
+                name: displayName,
+                avatar: photoURL,
             });
         }
     }

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import logoImg from '../assets/images/logo.svg';
 import { Button } from '../components/Button';
+import { Question } from '../components/Question';
 import { RoomCode } from '../components/RoomCode';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { database } from '../services/firebase';
@@ -78,7 +79,7 @@ export function Room() {
 
         const question = {
             content: newQuestion,
-            auth: {
+            author: {
                 name: user?.name,
                 avatar: user?.avatar,
             },
@@ -126,7 +127,15 @@ export function Room() {
                     </div>
                 </form>
 
-                {JSON.stringify(questions)}
+                <div className="question-list">
+                    {questions.map(question => {
+                        return <Question
+                            key={question.id}
+                            content={question.content}
+                            author={question.author}
+                        />
+                    })}
+                </div>
             </main>
         </div>
     );
