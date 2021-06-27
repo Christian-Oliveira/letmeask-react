@@ -11,13 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      # Instalar dependências Yarn
-      - name: Install dependencies
+      - name: Install Dependencies
       - run: yarn
-
-      # Build
-      - name: Run build
+      - name: Run Build
       - run: yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
