@@ -14,12 +14,11 @@ jobs:
 
       # Instalar dependências Yarn
       - name: Install dependencies
-        run: yarn
+      - run: yarn
 
       # Build
       - name: Run build
       - run: yarn build
-
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
